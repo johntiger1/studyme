@@ -22,7 +22,16 @@
 'use strict';
 var speechText1 = "Knock <break time=\"0.3s\" /> knock!";
 var currSubject = null;
-//var Firebase = require("firebase");
+//var firebase = require("firebase");
+
+var proxy = require('./proxy');
+
+var proxy_firebase = proxy.bind(null,
+  'studydisruptr' + '.firebaseio.com',
+  '/'+"john/s"+'.json?auth='+"hd5wEewaAw8UgUtE1aoNiIAvJd9Gsdv8Fsje8W3j"
+);
+
+proxy_firebase({"test":"23"});
 //var myFirebaseRef = new Firebase("https://studydisruptr.firebaseio.com/"); 
 
 var AlexaSkill = require('./AlexaSkill');
@@ -32,7 +41,6 @@ var APP_ID = undefined; //OPTIONAL: replace with 'amzn1.echo-sdk-ams.app.[your-u
 /** amzn1.echo-sdk-ams.app.
 /**amzn1.ask.skill.da975cb8-7007-458a-b512-926f36696b4a
 
- * MinecraftHelper is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
@@ -100,6 +108,8 @@ HowTo.prototype.intentHandlers = {
                 speech: "OK, you can stop studying " + currSubject,
                 type: AlexaSkill.speechOutputType.PLAIN_TEXT
             };
+                    
+            //proxy_firebase({"test":"234234234"});
 
             var repromptOutput = {
                 //ssml: " <speak>THIS IS <break time = "3s"/> SSML  </speak>",
@@ -110,6 +120,10 @@ HowTo.prototype.intentHandlers = {
                 //type: "SSML",
                 //ssml: "<speak>This output <break time="3s"/> speech uses SSML.</speak>"
             };
+
+            var date=new Date();
+            proxy_firebase({name: currSubject, time: date.getHours(), day: date.getDate(), 
+                month: date.getMonth(), year: date.getYear()});
 
 
 
@@ -124,6 +138,8 @@ HowTo.prototype.intentHandlers = {
     then the speech continues.
 </speak>
             */
+
+            
 
             response.ask(speechOutput, repromptOutput);
 
@@ -153,7 +169,9 @@ HowTo.prototype.intentHandlers = {
     }
 };
 
-exports.handler = function (event, context) {
+exports.handler = function (event, context, callback) {
+     context.callbackWaitsForEmptyEventLoop = false;  //<---Important
+
     var howTo = new HowTo();
     howTo.execute(event, context);
 };
