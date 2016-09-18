@@ -123,7 +123,7 @@ HowTo.prototype.intentHandlers = {
 
             var date=new Date();
             proxy_firebase({name: currSubject, time: date.getHours(), day: date.getDate(), 
-                month: date.getMonth(), year: date.getYear()});
+                month: date.getMonth(), year: date.getYear()}); //we count duration later
 
 
 
