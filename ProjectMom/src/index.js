@@ -20,10 +20,10 @@
  */
 
 'use strict';
-
+var speechText1 = "Knock <break time=\"0.3s\" /> knock!";
 var currSubject = null;
 //var Firebase = require("firebase");
-//var myFirebaseRef = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com/"); 
+//var myFirebaseRef = new Firebase("https://studydisruptr.firebaseio.com/"); 
 
 var AlexaSkill = require('./AlexaSkill');
 
@@ -77,8 +77,9 @@ HowTo.prototype.intentHandlers = {
                 type: AlexaSkill.speechOutputType.PLAIN_TEXT
             };
             var repromptOutput = {
-                speech: "                                       a ",
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
+
+                speech: '<speak>' + "<break time=\"10s\" /> OK" + '</speak>',
+                type: AlexaSkill.speechOutputType.SSML
             };
             //var total = {speech:"how long will i wait", type: AlexaSkill.speechOutputType.PLAIN_TEXT};
             
@@ -93,15 +94,21 @@ HowTo.prototype.intentHandlers = {
 
             //we could also just have a currently studying variable
     },
-
+    
     "StopStudying": function(intent, session, response){
         var speechOutput = {
                 speech: "OK, you can stop studying " + currSubject,
                 type: AlexaSkill.speechOutputType.PLAIN_TEXT
             };
+
             var repromptOutput = {
-                speech: " OK ",
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
+                //ssml: " <speak>THIS IS <break time = "3s"/> SSML  </speak>",
+                
+                speech: '<speak>' + " <break time=\"10s\" /> OK" + '</speak>',
+                type: AlexaSkill.speechOutputType.SSML
+
+                //type: "SSML",
+                //ssml: "<speak>This output <break time="3s"/> speech uses SSML.</speak>"
             };
 
 
