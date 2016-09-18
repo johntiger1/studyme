@@ -81,7 +81,7 @@ function addGraphTypes() {
         "All-time Study Frequency",
         "Average Weekly Study", // bar
         "Average Monthly Study",
-        "Average All-time Studied",
+        "Average All-time Study",
         ];
         
     graphTypes.forEach(function(graphType, index) {
