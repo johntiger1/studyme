@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">	
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDwyL9sN8Vhmdm6AcGCImVLGaHngVSxsy8",
+        authDomain: "studydisruptr.firebaseapp.com",
+        databaseURL: "https://studydisruptr.firebaseio.com",
+        storageBucket: "studydisruptr.appspot.com",
+        messagingSenderId: "1031519770242"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>StudyDisruptr</title>
+  </head>
+  <body>
+    <button id="populateFirebase">
+        Populate Firebase with Dummy data
+    </button>
+    <script type="text/javascript">	
+		var database = firebase.database();
+
+		firebase.auth().signInAnonymously().catch(function(error) {
+			alert("ERROR IN AUTHENTICATION!!!");
+		});	
+        
+        $("#populateFirebase").on("click", function(event) {
+            database.ref('Mathematics/2016/April/lobby/request/').set({
+                test: 'valueasdfaefawfe'
+            });
+        });
+	</script>
+    <script src="main.js"></script>
+  </body>
+</html>
